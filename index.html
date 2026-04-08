@@ -1918,14 +1918,13 @@
                         <div class="form-group">
                             <select required>
                                 <option value="" disabled selected>Select Room Type</option>
-                                <option value="single">Single Room - $30/night</option>
+                                <option value="single">Single Room - $25/night</option>
                                 <option value="double">Double Room - $40/night</option>
                                 <option value="suite">Executive Suite - $50/night</option>
                                 <option value="one-bed">One Bedroom Apartment - $80/night</option>
                                 <option value="two-bed">Two Bedroom Apartment - $100/night</option>
                                 <option value="three-bed">Three Bedroom Apartment - $150/night</option>
                             </select>
-                            <label>Select Room Type</label>
                             <i class="fas fa-bed"></i>
                         </div>
                         <div class="form-group">
@@ -2040,12 +2039,11 @@
             </div>
         </div>
     </div>
-   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Animated Typography for Hero Title
+    // === Your existing animations, mobile nav, modal, etc. (unchanged) ===
     const heroTitle = "Luxury Meets Kigali";
     const titleElement = document.getElementById('animatedTitle');
-    // Split title into letters and wrap each in span
     heroTitle.split('').forEach((letter, index) => {
         const span = document.createElement('span');
         span.className = 'letter';
@@ -2053,6 +2051,7 @@
         span.style.animationDelay = `${index * 0.05}s`;
         titleElement.appendChild(span);
     });
+
     // Mobile Navigation
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mainNav = document.getElementById('mainNav');
@@ -2062,13 +2061,14 @@
             ? '<i class="fas fa-times"></i>'
             : '<i class="fas fa-bars"></i>';
     });
-    // Close mobile menu when clicking a link
+
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', () => {
             mainNav.classList.remove('active');
             mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         });
     });
+
     // Header scroll effect
     window.addEventListener('scroll', () => {
         const header = document.querySelector('header');
@@ -2078,10 +2078,12 @@
             header.classList.remove('scrolled');
         }
     });
+
     // Booking Modal
     const bookingBtns = document.querySelectorAll('#tourBookingBtn, .view-details-btn');
     const bookingModal = document.getElementById('bookingModal');
     const closeModal = document.getElementById('closeModal');
+
     bookingBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -2089,29 +2091,39 @@
             document.body.style.overflow = 'hidden';
         });
     });
+
     closeModal.addEventListener('click', () => {
         bookingModal.classList.remove('active');
         document.body.style.overflow = 'auto';
     });
-    // Close modals when clicking outside
+
     window.addEventListener('click', (e) => {
         if (e.target === bookingModal) {
             bookingModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
     });
-    // Form submission with EmailJS - ACCOMMODATION FORM
+
+    // ==================== PESAPAL LINK ====================
+    const pesapalLink = "https://store.pesapal.com/itundaresidence";
+
+    function openPesapal() {
+        window.open(pesapalLink, '_blank');
+    }
+
+    // ==================== FORM SUBMISSIONS ====================
+
+    // 1. Accommodation Form (Main Contact Form)
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const form = e.target;
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalBtnText = submitBtn.innerHTML;
-    
+
         try {
-            // Show loading state
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
-            // Get form data
+
             const formData = {
                 from_name: form.querySelector('input[type="text"]').value,
                 from_email: form.querySelector('input[type="email"]').value,
@@ -2122,35 +2134,32 @@
                 message: form.querySelector('textarea').value,
                 to_email: "itundaresidence@gmail.com"
             };
-            // Send to residence
-            await emailjs.send(
-                "service_8sxnzuh", // Your service ID
-                "template_rq6rf91", // Replace with your ACCOMMODATION template ID
-                formData
-            );
+
+            await emailjs.send("service_8sxnzuh", "template_rq6rf91", formData);
 
             showNotification('Your Accommodation booking request has been submitted. You will get a confirmation as soon as possible.');
+            openPesapal();        // ← Pesapal opens here
             form.reset();
         } catch (error) {
             console.error('Error sending email:', error);
             showNotification('Sorry, there was an error sending your message. Please try again.');
         } finally {
-            // Reset button state
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
         }
     });
-    // Form submission with EmailJS - TOUR BOOKING FORM
+
+    // 2. Tour Booking Form (NO Pesapal)
     document.getElementById('tourBookingForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const form = e.target;
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalBtnText = submitBtn.innerHTML;
-    
+
         try {
-            // Show loading state
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
+
             const formData = {
                 from_name: form.querySelector('input[type="text"]').value,
                 from_email: form.querySelector('input[type="email"]').value,
@@ -2161,35 +2170,32 @@
                 details: form.querySelector('textarea').value,
                 to_email: "itundaresidence@gmail.com"
             };
-            // Send to residence
-            await emailjs.send(
-                "service_8sxnzuh",
-                "template_sdkr713", // Your tour booking template ID
-                formData
-            );
+
+            await emailjs.send("service_8sxnzuh", "template_sdkr713", formData);
 
             showNotification('Your Tour booking request has been submitted. You will get a confirmation as soon as possible!');
+            // No Pesapal for tours
             form.reset();
         } catch (error) {
             console.error('Error sending email:', error);
             showNotification('Sorry, there was an error submitting your request. Please try again.');
         } finally {
-            // Reset button state
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
         }
     });
-    // Form submission with EmailJS - VIEWING MODAL FORM
+
+    // 3. Viewing Modal Form (Accommodation)
     document.getElementById('bookingForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const form = e.target;
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalBtnText = submitBtn.innerHTML;
-    
+
         try {
-            // Show loading state
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
+
             const formData = {
                 from_name: form.querySelector('input[type="text"]').value,
                 from_email: form.querySelector('input[type="email"]').value,
@@ -2199,14 +2205,11 @@
                 room_type: form.querySelectorAll('select')[1].value,
                 to_email: "itundaresidence@gmail.com"
             };
-            // Send to residence
-            await emailjs.send(
-                "service_8sxnzuh",
-                "", // Your general inquiry template ID
-                formData
-            );
-        
-            showNotification('Your Accommodation booking request has been submitted, You will get A confirmation As soon As Possible');
+
+            await emailjs.send("service_8sxnzuh", "", formData);
+
+            showNotification('Your Accommodation booking request has been submitted. You will get a confirmation as soon as possible.');
+            openPesapal();        // ← Pesapal opens here
             bookingModal.classList.remove('active');
             document.body.style.overflow = 'auto';
             form.reset();
@@ -2214,36 +2217,30 @@
             console.error('Error sending email:', error);
             showNotification('Sorry, there was an error booking your viewing. Please try again.');
         } finally {
-            // Reset button state
             submitBtn.innerHTML = originalBtnText;
             submitBtn.disabled = false;
         }
     });
+
     // Notification function
     function showNotification(message) {
         const notification = document.createElement('div');
         notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--accent-gold);
-            color: var(--primary-dark);
-            padding: 15px 25px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-heavy);
-            z-index: 3000;
-            animation: slideIn 0.3s ease-out;
+            position: fixed; top: 20px; right: 20px; background: var(--accent-gold);
+            color: var(--primary-dark); padding: 15px 25px; border-radius: var(--radius);
+            box-shadow: var(--shadow-heavy); z-index: 3000; animation: slideIn 0.3s ease-out;
             font-weight: 600;
         `;
         notification.textContent = message;
         document.body.appendChild(notification);
-  
+
         setTimeout(() => {
             notification.style.animation = 'slideOut 0.3s ease-out forwards';
             setTimeout(() => notification.remove(), 300);
         }, 3000);
     }
-    // FAQ Accordion
+
+    // FAQ, Maps, Scroll animations, etc. (rest of your original code)
     const faqQuestions = document.querySelectorAll('.faq-question');
     faqQuestions.forEach(question => {
         question.addEventListener('click', () => {
@@ -2251,66 +2248,52 @@
             faqItem.classList.toggle('active');
         });
     });
-    // Initialize Maps
+
     function initMap(mapId) {
-        // Updated to exact coordinates from Google Maps link
         const itundaResidence = [-1.9415685, 30.1265401];
-  
-        // Create map
         const map = L.map(mapId).setView(itundaResidence, 15);
-  
-        // Add tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-  
-        // Custom icon
+
         const goldIcon = L.divIcon({
             html: '<i class="fas fa-map-marker-alt" style="color: #d4af37; font-size: 30px;"></i>',
             iconSize: [30, 30],
             className: 'gold-marker'
         });
-  
-        // Add marker
+
         L.marker(itundaResidence, {icon: goldIcon}).addTo(map)
             .bindPopup(`
                 <div style="padding: 10px;">
-                    <h3 style="margin: 0 0 0 10px 0; color: #1a1a1a;">Itunda Residence</h3>
+                    <h3 style="margin: 0 0 10px 0; color: #1a1a1a;">Itunda Residence</h3>
                     <p style="margin: 0; color: #5a5a5a;">KG 46 St, Kigali, Rwanda</p>
                     <a href="https://maps.google.com/?q=KG+46+St,+Kigali,+Rwanda" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background: #d4af37; color: #1a1a1a; text-decoration: none; border-radius: 3px; font-weight: 600;">Get Directions</a>
                 </div>
-            `)
-            .openPopup();
+            `).openPopup();
     }
-    // Initialize maps when page loads
+
     document.addEventListener('DOMContentLoaded', () => {
         initMap('map');
         initMap('contact-map');
     });
-    // Scroll animations
+
+    // Scroll animations, Parallax, Floating labels (keep the rest of your code here)
     function checkScroll() {
         const fadeElements = document.querySelectorAll('.fade-in');
-  
         fadeElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-      
-            if (elementTop < windowHeight - 100) {
+            if (element.getBoundingClientRect().top < window.innerHeight - 100) {
                 element.classList.add('visible');
             }
         });
     }
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('load', checkScroll);
-    // Parallax effect for hero
+
     window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
         const hero = document.querySelector('.hero-background');
-        if (hero) {
-            hero.style.transform = `scale(${1.05 - scrolled * 0.00015})`;
-        }
+        if (hero) hero.style.transform = `scale(${1.05 - window.pageYOffset * 0.00015})`;
     });
-    // Add floating label functionality
+
     const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
     formInputs.forEach(input => {
         input.addEventListener('focus', () => {
@@ -2324,7 +2307,7 @@
                 label.style.padding = '0 8px';
             }
         });
-  
+
         input.addEventListener('blur', () => {
             if (!input.value) {
                 const label = input.nextElementSibling;
