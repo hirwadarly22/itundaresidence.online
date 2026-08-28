@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITUNDA RESIDENCE KIGALI — Luxury Living</title>
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- EmailJS (LOCKED — DO NOT MODIFY) -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({ publicKey: "Bkezhf8KlDyKE4_ki" });
+    })();
+  </script>
+  <style>
+    /* ===== GLOBAL VARIABLES — SOPHISTICATED LUXURY PALETTE ===== */
+    :root {
+      --primary-dark: #0b0b0b;
+      --primary-charcoal: #141414;
+      --primary-warm: #1a1a1a;
+      --accent-gold: #c9a84c;
+      --accent-gold-light: #e0c87a;
+      --accent-gold-glow: rgba(201, 168, 76, 0.25);
+      --accent-ivory: #f5efe6;
+      --neutral-white: #ffffff;
+      --neutral-offwhite: #f8f6f3;
+      --neutral-gray: #d0d0d0;
+      --text-dark: #0b0b0b;
+      --text-light: #6b6b6b;
+      --text-muted: #8a8a8a;
+      --overlay-dark: rgba(11, 11, 11, 0.72);
+      --overlay-warm: rgba(20, 20, 20, 0.6);
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.06);
+      --shadow-medium: 0 30px 80px rgba(0, 0, 0, 0.10);
+      --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.18);
+      --shadow-gold: 0 20px 50px rgba(201, 168, 76, 0.20);
+      --radius: 8px;
+      --radius-lg: 16px;
+      --radius-xl: 28px;
+      --transition-smooth: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Montserrat', sans-serif;
+    }
+
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      line-height: 1.7;
+      color: var(--text-dark);
+      background: var(--neutral-offwhite);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ===== BUTTON SYSTEM — PREMIUM ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 18px 44px;
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(201, 168, 76, 0.20);
+      font-family: var(--font-sans);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.20), transparent);
+      transition: left 0.7s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      background: #dbb95a;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 18px 48px rgba(201, 168, 76, 0.30);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--neutral-white);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--accent-gold);
+      box-shadow: 0 12px 32px rgba(201, 168, 76, 0.10);
+      transform: translateY(-3px);
+    }
+
+    .btn-arrow {
+      gap: 16px;
+    }
+
+    .btn-arrow i {
+      transition: transform 0.35s ease;
+    }
+
+    .btn-arrow:hover i {
+      transform: translateX(6px);
+    }
+
+    .btn-dark {
+      background: var(--primary-dark);
+      color: var(--neutral-white);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.20);
+    }
+
+    .btn-dark:hover {
+      background: #1a1a1a;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.30);
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .section-title .label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      font-family: var(--font-sans);
+    }
+
+    .section-title h2 {
+      font-size: 3.6rem;
+      color: var(--primary-dark);
+      display: inline-block;
+      position: relative;
+      letter-spacing: -0.03em;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 4px;
+      background: var(--accent-gold);
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 1.15rem;
+      max-width: 680px;
+      margin: 30px auto 0;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ===== FADE-IN REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ============================================================
+               HEADER — LUXURY GLASS NAV
+               ============================================================ */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 24px 0;
+      transition: var(--transition-smooth);
+    }
+
+    header.scrolled {
+      background: rgba(11, 11, 11, 0.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      padding: 10px 0;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, 0.20);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--neutral-white);
+      text-decoration: none;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1001;
+      transition: var(--transition-smooth);
+    }
+
+    .logo span {
+      color: var(--accent-gold);
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      bottom: -4px;
+      left: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .logo:hover::after {
+      width: 100%;
+    }
+
+    /* ---- Navigation (premium hover: gold dot + subtle line) ---- */
+    nav ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 4px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: rgba(255, 255, 255, 0.80);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 13px;
+      padding: 8px 18px;
+      border-radius: 40px;
+      transition: var(--transition-smooth);
+      position: relative;
+      letter-spacing: 0.6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+    }
+
+    /* Gold dot indicator */
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 6px;
+      height: 6px;
+      background: var(--accent-gold);
+      border-radius: 50%;
+      transition: transform 0.4s var(--transition-bounce), opacity 0.3s ease;
+      opacity: 0;
+      box-shadow: 0 0 16px rgba(201, 168, 76, 0.35);
+    }
+
+    nav ul li a:hover::before,
+    nav ul li a.active-link::before {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    /* Subtle underline accent */
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      transition: transform 0.5s ease;
+      opacity: 0.5;
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active-link::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    nav ul li a:hover {
+      color: var(--neutral-white);
+      text-shadow: 0 0 30px rgba(201, 168, 76, 0.10);
+    }
+
+    nav ul li a.active-link {
+      color: var(--neutral-white);
+    }
+
+    /* ---- Book Now CTA (premium pill with arrow) ---- */
+    .nav-cta {
+      background: var(--accent-gold) !important;
+      color: var(--primary-dark) !important;
+      padding: 10px 28px !important;
+      border-radius: 60px !important;
+      font-weight: 700 !important;
+      box-shadow: 0 6px 28px rgba(201, 168, 76, 0.20);
+      gap: 10px !important;
+      letter-spacing: 0.8px !important;
+      font-size: 13px !important;
+    }
+
+    .nav-cta i {
+      transition: transform 0.35s ease;
+    }
+
+    .nav-cta:hover i {
+      transform: translateX(5px);
+    }
+
+    .nav-cta::before,
+    .nav-cta::after {
+      display: none !important;
+    }
+
+    .nav-cta:hover {
+      background: #dbb95a !important;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201, 168, 76, 0.35);
+    }
+
+    /* ---- Mobile menu button ---- */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--neutral-white);
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 1001;
+      transition: var(--transition-smooth);
+      padding: 4px;
+    }
+
+    .mobile-menu-btn:hover {
+      color: var(--accent-gold);
+    }
+
+    /* ============================================================
+               HERO — CINEMATIC LUXURY
+               ============================================================ */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-white);
+      overflow: hidden;
+    }
+
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, rgba(11, 11, 11, 0.75) 0%, rgba(11, 11, 11, 0.30) 60%, rgba(11, 11, 11, 0.60) 100%),
+        url('infront.jpg') no-repeat center center/cover;
+      z-index: -1;
+      transform: scale(1.08);
+      animation: heroZoom 25s infinite alternate ease-in-out;
+    }
+
+    @keyframes heroZoom {
+      0% {
+        transform: scale(1.08);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 1000px;
+      padding: 0 30px;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(201, 168, 76, 0.10);
+      padding: 8px 28px;
+      border-radius: 60px;
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      margin-bottom: 32px;
+      backdrop-filter: blur(4px);
+      animation: fadeUp 1.2s ease-out 0.2s both;
+      font-family: var(--font-sans);
+    }
+
+    .hero h1 {
+      font-size: 5.2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 8px 40px rgba(0, 0, 0, 0.30);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      animation: fadeUp 1.2s ease-out 0.4s both;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent-gold);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 50px;
+      opacity: 0.85;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.9;
+      animation: fadeUp 1.2s ease-out 0.6s both;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      animation: fadeUp 1.2s ease-out 0.8s both;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn-primary {
+      padding: 20px 52px;
+      font-size: 15px;
+      gap: 18px;
+      box-shadow: 0 16px 48px rgba(201, 168, 76, 0.25);
+    }
+
+    .hero-btn-primary i {
+      transition: transform 0.35s ease;
+    }
+
+    .hero-btn-primary:hover i {
+      transform: translateX(8px);
+    }
+
+    .hero-btn-secondary {
+      padding: 18px 44px;
+      font-size: 14px;
+      border-color: rgba(255, 255, 255, 0.20);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-btn-secondary:hover {
+      border-color: var(--accent-gold);
+      color: var(--neutral-white);
+      background: rgba(201, 168, 76, 0.06);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.30);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      animation: fadeUp 1.4s ease-out 1s both;
+      font-family: var(--font-sans);
+    }
+
+    .scroll-indicator .line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.30), transparent);
+      animation: scrollPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,
+      100% {
+        transform: scaleY(0.4);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================
+               ROOMS — EDITORIAL LUXURY SHOWCASE
+               ============================================================ */
+    .rooms {
+      padding: 130px 0 100px;
+      background: var(--neutral-offwhite);
+      position: relative;
+    }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 50px;
+      margin-top: 20px;
+    }
+
+    .room-card {
+      background: var(--neutral-white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+      position: relative;
+      will-change: transform;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .room-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .room-card .image-wrap {
+      height: 320px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .room-card .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s ease;
+    }
+
+    .room-card:hover .image-wrap img {
+      transform: scale(1.07);
+    }
+
+    /* Gradient overlay + CTA */
+    .room-card .image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 65%;
+      background: linear-gradient(to top, rgba(11, 11, 11, 0.75) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 35px;
+    }
+
+    .room-card:hover .image-overlay {
+      opacity: 1;
+    }
+
+    .image-overlay .room-cta {
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      padding: 14px 34px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      transform: translateY(25px);
+      transition: transform 0.45s var(--transition-bounce), background 0.3s ease;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+      opacity: 0;
+      font-family: var(--font-sans);
+      text-transform: uppercase;
+    }
+
+    .room-card:hover .image-overlay .room-cta {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .image-overlay .room-cta i {
+      transition: transform 0.35s ease;
+    }
+
+    .image-overlay .room-cta:hover {
+      background: var(--accent-gold-light);
+    }
+
+    .image-overlay .room-cta:hover i {
+      transform: translateX(6px);
+    }
+
+    .room-card .info {
+      padding: 32px 34px 38px;
+      background: var(--neutral-white);
+      position: relative;
+      z-index: 2;
+    }
+
+    .room-card .info h3 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      transition: transform 0.4s ease;
+    }
+
+    .room-card:hover .info h3 {
+      transform: translateY(-2px);
+    }
+
+    .room-card .info .desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .room-features {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .room-features .feature {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .room-features .feature i {
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .room-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-align: center;
+      letter-spacing: -0.02em;
+      font-family: var(--font-serif);
+    }
+
+    .room-price small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+    }
+
+    /* ============================================================
+               AMENITIES — SOPHISTICATED
+               ============================================================ */
+    .amenities {
+      padding: 120px 0;
+      background: var(--neutral-white);
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+    }
+
+    .amenity-card {
+      padding: 50px 30px 45px;
+      text-align: center;
+      background: var(--neutral-offwhite);
+      border-radius: var(--radius-lg);
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .amenity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease;
+    }
+
+    .amenity-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .amenity-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(201, 168, 76, 0.10);
+    }
+
+    .amenity-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(201, 168, 76, 0.06);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      transition: var(--transition-smooth);
+    }
+
+    .amenity-card:hover .amenity-icon {
+      background: var(--accent-gold);
+      transform: scale(1.05) rotate(3deg);
+    }
+
+    .amenity-icon i {
+      font-size: 32px;
+      color: var(--accent-gold);
+      transition: var(--transition-smooth);
+    }
+
+    .amenity-card:hover .amenity-icon i {
+      color: var(--neutral-white);
+    }
+
+    .amenity-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .amenity-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+               GALLERY — IMMERSIVE
+               ============================================================ */
+    .gallery {
+      padding: 120px 0;
+      background: var(--neutral-offwhite);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      height: 340px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      position: relative;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-medium);
+      z-index: 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(11, 11, 11, 0.80), transparent 50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 30px;
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay h4 {
+      color: var(--neutral-white);
+      font-size: 1.5rem;
+      transform: translateY(20px);
+      transition: transform 0.4s ease 0.1s;
+    }
+
+    .overlay p {
+      color: var(--accent-ivory);
+      font-size: 0.9rem;
+      transform: translateY(20px);
+      transition: transform 0.4s ease 0.2s;
+      font-weight: 300;
+    }
+
+    .gallery-item:hover .overlay h4,
+    .gallery-item:hover .overlay p {
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+               FAQ — ELEGANT ACCORDION
+               ============================================================ */
+    .faq {
+      padding: 120px 0;
+      background: var(--neutral-white);
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--neutral-offwhite);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(201, 168, 76, 0.12);
+    }
+
+    .faq-question {
+      padding: 24px 32px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: var(--transition-smooth);
+      background: var(--neutral-offwhite);
+      font-family: var(--font-sans);
+    }
+
+    .faq-question:hover {
+      background: rgba(201, 168, 76, 0.03);
+    }
+
+    .faq-toggle {
+      color: var(--accent-gold);
+      transition: transform 0.4s ease;
+      font-size: 1.2rem;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 32px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      color: var(--text-light);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0 32px 28px;
+      max-height: 400px;
+    }
+
+    /* ============================================================
+               ATTRACTIONS — EXPLORE KIGALI
+               ============================================================ */
+    .attractions {
+      padding: 120px 0;
+      background: var(--neutral-offwhite);
+    }
+
+    .attractions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .attraction-card {
+      background: var(--neutral-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+    }
+
+    .attraction-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .attraction-image {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .attraction-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .attraction-card:hover .attraction-image img {
+      transform: scale(1.06);
+    }
+
+    .attraction-info {
+      padding: 28px 28px 32px;
+    }
+
+    .attraction-info h4 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .attraction-info p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .attraction-distance {
+      display: flex;
+      align-items: center;
+      color: var(--accent-gold);
+      font-weight: 600;
+      font-size: 0.85rem;
+      gap: 10px;
+      font-family: var(--font-sans);
+      letter-spacing: 0.3px;
+    }
+
+    .attraction-distance i {
+      font-size: 0.9rem;
+    }
+
+    /* ============================================================
+               TOUR BOOKING & CONTACT — PREMIUM FORMS
+               ============================================================ */
+    .tour-booking,
+    .contact-section {
+      padding: 120px 0;
+      background: var(--neutral-white);
+      position: relative;
+    }
+
+    .tour-booking {
+      background: var(--neutral-offwhite);
+    }
+
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: stretch;
+    }
+
+    .form-card {
+      background: var(--neutral-white);
+      padding: 55px 50px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+
+    .form-card h3 {
+      font-size: 2rem;
+      margin-bottom: 32px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 18px 52px 18px 22px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: var(--radius);
+      font-size: 15px;
+      transition: var(--transition-smooth);
+      background: var(--neutral-offwhite);
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent-gold);
+      background: var(--neutral-white);
+      box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.05);
+      outline: none;
+    }
+
+    .form-group i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-gold);
+      font-size: 18px;
+      opacity: 0.5;
+      transition: var(--transition-smooth);
+    }
+
+    .form-group textarea~i {
+      top: 22px;
+      transform: none;
+    }
+
+    .form-group input:focus~i,
+    .form-group textarea:focus~i,
+    .form-group select:focus~i {
+      opacity: 1;
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 18px;
+      left: 22px;
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+      pointer-events: none;
+      font-size: 15px;
+      background: transparent;
+      padding: 0;
+      font-weight: 300;
+    }
+
+    .form-group input:focus+label,
+    .form-group input:not(:placeholder-shown)+label,
+    .form-group textarea:focus+label,
+    .form-group textarea:not(:placeholder-shown)+label,
+    .form-group select:focus+label,
+    .form-group select:not([value=""])+label {
+      top: -12px;
+      left: 18px;
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      background: var(--neutral-white);
+      padding: 0 8px;
+      font-weight: 600;
+    }
+
+    .map-wrap {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      min-height: 500px;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .map-wrap #map,
+    .map-wrap #contact-map {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+    }
+
+    /* ============================================================
+               FOOTER
+               ============================================================ */
+    footer {
+      background: var(--primary-dark);
+      color: var(--neutral-white);
+      padding: 80px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h3 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      position: relative;
+      padding-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background: var(--accent-gold);
+      bottom: 0;
+      left: 0;
+    }
+
+    .footer-col p {
+      color: rgba(255, 255, 255, 0.60);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 300;
+      font-size: 0.95rem;
+    }
+
+    .footer-links a i {
+      color: var(--accent-gold);
+      width: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold);
+      padding-left: 6px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 50%;
+      color: rgba(255, 255, 255, 0.60);
+      transition: var(--transition-smooth);
+      font-size: 1.1rem;
+    }
+
+    .social-links a:hover {
+      background: var(--accent-gold);
+      transform: translateY(-4px);
+      color: var(--primary-dark);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.30);
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+               MODAL — PREMIUM RESERVATION
+               ============================================================ */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.70);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--neutral-white);
+      border-radius: var(--radius-xl);
+      max-width: 600px;
+      width: 100%;
+      max-height: 95vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalIn 0.5s ease-out;
+      box-shadow: var(--shadow-heavy);
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      padding: 32px 38px 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      padding: 0 8px;
+    }
+
+    .close-modal:hover {
+      color: var(--primary-dark);
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 35px 38px 40px;
+    }
+
+    /* ============================================================
+               RESPONSIVE
+               ============================================================ */
+    @media (max-width: 1200px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+      .map-wrap {
+        min-height: 400px;
+      }
+      .map-wrap #map,
+      .map-wrap #contact-map {
+        min-height: 400px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero h1 {
+        font-size: 4rem;
+      }
+      .section-title h2 {
+        font-size: 3rem;
+      }
+      .rooms-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 320px;
+        max-width: 80vw;
+        height: 100vh;
+        background: rgba(11, 11, 11, 0.98);
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        padding: 100px 36px 40px;
+        transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 1000;
+        border-left: 1px solid rgba(201, 168, 76, 0.06);
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.40);
+        display: block;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+      }
+
+      nav ul li {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        transition-delay: calc(0.04s * var(--i, 0));
+      }
+
+      nav.active ul li {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      nav ul li a {
+        padding: 14px 20px;
+        font-size: 16px;
+        width: 100%;
+        border-radius: 12px;
+        justify-content: flex-start;
+      }
+
+      nav ul li a::before,
+      nav ul li a::after {
+        display: none;
+      }
+
+      nav ul li a:hover {
+        background: rgba(201, 168, 76, 0.05);
+        color: var(--accent-gold);
+      }
+
+      nav ul li a.active-link {
+        background: rgba(201, 168, 76, 0.06);
+        color: var(--accent-gold);
+        border-left: 3px solid var(--accent-gold);
+        padding-left: 17px;
+      }
+
+      .nav-cta {
+        margin-top: 20px;
+        text-align: center;
+        justify-content: center;
+        background: var(--accent-gold) !important;
+        color: var(--primary-dark) !important;
+        padding: 16px 28px !important;
+        border-radius: 60px !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
+        width: 100%;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero p {
+        font-size: 1.05rem;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .btn {
+        width: 100%;
+        max-width: 340px;
+        padding: 16px 28px;
+        font-size: 13px;
+      }
+
+      .section-title h2 {
+        font-size: 2.4rem;
+      }
+      .section-title h2::after {
+        width: 50px;
+      }
+
+      .rooms-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .room-card .image-wrap {
+        height: 250px;
+      }
+
+      .amenities-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .attractions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-card {
+        padding: 40px 28px;
+      }
+      .split-layout {
+        gap: 40px;
+      }
+
+      .map-wrap {
+        min-height: 300px;
+      }
+      .map-wrap #map,
+      .map-wrap #contact-map {
+        min-height: 300px;
+      }
+
+      .faq-question {
+        padding: 18px 22px;
+        font-size: 0.95rem;
+      }
+      .faq-answer {
+        padding: 0 22px;
+      }
+      .faq-item.active .faq-answer {
+        padding: 0 22px 22px;
+      }
+
+      .modal-content {
+        margin: 10px;
+      }
+      .modal-header {
+        padding: 24px 28px 16px;
+      }
+      .modal-body {
+        padding: 24px 28px 30px;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero-badge {
+        font-size: 0.6rem;
+        padding: 6px 18px;
+        letter-spacing: 3px;
+      }
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      .room-card .info h3 {
+        font-size: 1.7rem;
+      }
+      .room-price {
+        font-size: 1.8rem;
+      }
+      .btn {
+        font-size: 12px;
+        padding: 14px 22px;
+      }
+      .logo {
+        font-size: 22px;
+      }
+      .container {
+        padding: 0 16px;
+      }
+    }
+
+    /* ============================================================
+               REDUCED MOTION
+               ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-background {
+        animation: none !important;
+        transform: scale(1) !important;
+      }
+      .reveal,
+      .reveal-left,
+      .reveal-right {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .scroll-indicator .line {
+        animation: none !important;
+      }
+    }
+
+    /* ============================================================
+               SCROLLBAR
+               ============================================================ */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-gold);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-gold-light);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="container header-container">
+      <a href="#" class="logo">ITUNDA <span>RESIDENCE</span></a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li style="--i:0"><a href="#home" class="active-link">Home</a></li>
+          <li style="--i:1"><a href="#rooms">Rooms</a></li>
+          <li style="--i:2"><a href="#amenities">Amenities</a></li>
+          <li style="--i:3"><a href="#gallery">Gallery</a></li>
+          <li style="--i:4"><a href="#faq">FAQ</a></li>
+          <li style="--i:5"><a href="#attractions">Explore</a></li>
+          <li style="--i:6"><a href="#tour-booking">Book Tours</a></li>
+          <li style="--i:7"><a href="#contact">Contact</a></li>
+          <li style="--i:8"><a href="#book-accomodation" class="nav-cta">Book Now <i class="fas fa-arrow-right"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ Premier Residence in Kigali</div>
+      <h1>Luxury Meets <span class="highlight">Kigali</span></h1>
+      <p>Experience true style at Itunda Residence, where modern design blends effortlessly with timeless elegance in the heart of Rwanda's vibrant capital.</p>
+      <div class="hero-buttons">
+        <a href="#book-accomodation" class="btn hero-btn-primary btn-arrow">Book Your Stay <i class="fas fa-arrow-right"></i></a>
+        <a href="#tour-booking" class="btn hero-btn-secondary">Explore Residence</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- ===== ROOMS ===== -->
+  <section class="rooms" id="rooms">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Accommodations</span>
+        <h2>Exquisite Rooms</h2>
+        <p class="section-subtitle">Experience luxury living with our 5 rooms, each designed with premium finishes and breathtaking views. The residence includes shared kitchen, living room, dining room, parking, garden, and balcony.</p>
+      </div>
+      <div class="rooms-grid">
+        <!-- Single Room -->
+        <div class="room-card reveal">
+          <div class="image-wrap">
+            <img src="New bed.jpeg" alt="Single Room">
+            <div class="image-overlay">
+              <a href="#book-accomodation" class="room-cta">View Room <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="info">
+            <h3>Single Room</h3>
+            <p class="desc">Perfect for individuals, featuring comfortable bedding, modern amenities, and a private bathroom.</p>
+            <div class="room-features">
+              <span class="feature"><i class="fas fa-bed"></i>1 Bed</span>
+              <span class="feature"><i class="fas fa-bath"></i>1 Bath</span>
+              <span class="feature"><i class="fas fa-vector-square"></i>25 m²</span>
+            </div>
+            <div class="room-price">$25 <small>/ night</small></div>
+          </div>
+        </div>
+        <!-- Double Room -->
+        <div class="room-card reveal">
+          <div class="image-wrap">
+            <img src="bedroom.png" alt="Double Room">
+            <div class="image-overlay">
+              <a href="#book-accomodation" class="room-cta">View Room <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="info">
+            <h3>Double Room</h3>
+            <p class="desc">Ideal for couples or friends, with spacious layout, premium furnishings, and a private bathroom.</p>
+            <div class="room-features">
+              <span class="feature"><i class="fas fa-bed"></i>2 Beds</span>
+              <span class="feature"><i class="fas fa-bath"></i>1 Bath</span>
+              <span class="feature"><i class="fas fa-vector-square"></i>35 m²</span>
+            </div>
+            <div class="room-price">$40 <small>/ night</small></div>
+          </div>
+        </div>
+        <!-- Executive Suite -->
+        <div class="room-card reveal">
+          <div class="image-wrap">
+            <img src="bedrooms.jpg" alt="Executive Suite">
+            <div class="image-overlay">
+              <a href="#book-accomodation" class="room-cta">View Room <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="info">
+            <h3>Executive Suite</h3>
+            <p class="desc">Luxurious suite with premium amenities, spacious layout, and elegant decor for the discerning traveler.</p>
+            <div class="room-features">
+              <span class="feature"><i class="fas fa-bed"></i>1 King</span>
+              <span class="feature"><i class="fas fa-bath"></i>2 Baths</span>
+              <span class="feature"><i class="fas fa-vector-square"></i>45 m²</span>
+            </div>
+            <div class="room-price">$50 <small>/ night</small></div>
+          </div>
+        </div>
+        <!-- One Bed Apartment -->
+        <div class="room-card reveal">
+          <div class="image-wrap">
+            <img src="bedroom.png" alt="One Bed Apartment">
+            <div class="image-overlay">
+              <a href="#book-accomodation" class="room-cta">View Room <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="info">
+            <h3>One Bed Apartment</h3>
+            <p class="desc">Spacious apartment with separate living area, fully equipped kitchen, and private balcony.</p>
+            <div class="room-features">
+              <span class="feature"><i class="fas fa-bed"></i>1 Bed</span>
+              <span class="feature"><i class="fas fa-bath"></i>1 Bath</span>
+              <span class="feature"><i class="fas fa-vector-square"></i>55 m²</span>
+            </div>
+            <div class="room-price">$80 <small>/ night</small></div>
+          </div>
+        </div>
+        <!-- Two Bed Apartment -->
+        <div class="room-card reveal">
+          <div class="image-wrap">
+            <img src="new apartment.jpeg" alt="Two Bed Apartment">
+            <div class="image-overlay">
+              <a href="#book-accomodation" class="room-cta">View Room <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="info">
+            <h3>Two Bed Apartment</h3>
+            <p class="desc">Perfect for families or groups, featuring two bedrooms, modern kitchen, and spacious living area.</p>
+            <div class="room-features">
+              <span class="feature"><i class="fas fa-bed"></i>2 Beds</span>
+              <span class="feature"><i class="fas fa-bath"></i>2 Baths</span>
+              <span class="feature"><i class="fas fa-vector-square"></i>75 m²</span>
+            </div>
+            <div class="room-price">$100 <small>/ night</small></div>
+          </div>
+        </div>
+        <!-- Three Bed Apartment -->
+        <div class="room-card reveal">
+          <div class="image-wrap">
+            <img src="another.jpg" alt="Three Bed Apartment">
+            <div class="image-overlay">
+              <a href="#book-accomodation" class="room-cta">View Room <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="info">
+            <h3>Three Bed Apartment</h3>
+            <p class="desc">Luxurious three-bedroom apartment with premium finishes, perfect for larger groups or families.</p>
+            <div class="room-features">
+              <span class="feature"><i class="fas fa-bed"></i>3 Beds</span>
+              <span class="feature"><i class="fas fa-bath"></i>2 Baths</span>
+              <span class="feature"><i class="fas fa-vector-square"></i>95 m²</span>
+            </div>
+            <div class="room-price">$150 <small>/ night</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AMENITIES ===== -->
+  <section class="amenities" id="amenities">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Facilities</span>
+        <h2>Premium Amenities</h2>
+        <p class="section-subtitle">Experience world-class facilities designed to enhance your lifestyle and provide unparalleled comfort.</p>
+      </div>
+      <div class="amenities-grid">
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
+          <h3>High-Speed Internet</h3>
+          <p>Fiber-optic internet throughout the residence for seamless connectivity.</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><i class="fas fa-car"></i></div>
+          <h3>Valet Parking</h3>
+          <p>Secure underground parking with valet service for residents and guests.</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Green Spaces</h3>
+          <p>Beautifully landscaped gardens and relaxation areas throughout the property.</p>
+        </div>
+        <div class="amenity-card reveal">
+          <div class="amenity-icon"><i class="fas fa-tshirt"></i></div>
+          <h3>Laundry Facilities</h3>
+          <p>Convenient on-site laundry facilities for residents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Visual Story</span>
+        <h2>Residence Gallery</h2>
+        <p class="section-subtitle">Explore the exquisite interiors and stunning common areas of Itunda Residence.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal"><img src="kitchen.png" alt="Modern Kitchen"><div class="overlay"><h4>Modern Kitchen</h4><p>Bright, open kitchen perfect for cooking and entertaining</p></div></div>
+        <div class="gallery-item reveal"><img src="bedroom.png" alt="Luxury Bedroom"><div class="overlay"><h4>Bedroom</h4><p>A spacious, sun-filled bedroom with breathtaking panoramic views.</p></div></div>
+        <div class="gallery-item reveal"><img src="livingroom.png" alt="Elegant Living Room"><div class="overlay"><h4>Living Area</h4><p>A bright, welcoming, Warm space welcoming living area</p></div></div>
+        <div class="gallery-item reveal"><img src="bathroom.png" alt="Spa Bathroom"><div class="overlay"><h4>Spa Bathroom</h4><p>A luxurious bathroom designed for ultimate relaxation</p></div></div>
+        <div class="gallery-item reveal"><img src="balcon.jpeg" alt="Balcony View"><div class="overlay"><h4>Balcony View</h4><p>Enjoy stunning views from our private balconies</p></div></div>
+        <div class="gallery-item reveal"><img src="bathroomagain.jpeg" alt="Lush Garden"><div class="overlay"><h4>Bathroom</h4><p>Relax in our beautifully Rain showers</p></div></div>
+        <div class="gallery-item reveal"><img src="picture1.jpeg" alt="Secure Parking"><div class="overlay"><h4>Family room</h4><p>Spacious, bright, cozy space for gathering</p></div></div>
+        <div class="gallery-item reveal"><img src="bedroom2.jpeg" alt="Dining Room"><div class="overlay"><h4>Bedrooms</h4><p>Resting space,Relaxation& Comfort zone</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Questions</span>
+        <h2>Frequently Asked Questions</h2>
+        <p class="section-subtitle">Find answers to common questions about living at Itunda Residence.</p>
+      </div>
+      <div class="faq-container reveal">
+        <div class="faq-item">
+          <div class="faq-question"><span>What is included in the rent?</span><i class="fas fa-plus faq-toggle"></i></div>
+          <div class="faq-answer"><p>Rent includes free breakfast, laundry facilities, WiFi, high-speed fiber internet, 24/7 security, access to all amenities maintenance services, and basic utilities. Additional utilities are billed separately based on usage.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><span>Are pets allowed in the residence?</span><i class="fas fa-plus faq-toggle"></i></div>
+          <div class="faq-answer"><p>No, pets are not allowed in the residence.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><span>What parking options are available?</span><i class="fas fa-plus faq-toggle"></i></div>
+          <div class="faq-answer"><p>Each room comes with access to shared parking. Additional parking spaces and visitor parking are available for an extra fee. Valet parking service is complimentary for residents.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ATTRACTIONS ===== -->
+  <section class="attractions" id="attractions">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Discover</span>
+        <h2>Explore Kigali Tours And Other Different Places</h2>
+        <p class="section-subtitle">Discover the vibrant attractions and cultural landmarks near Itunda Residence.</p>
+      </div>
+      <div class="attractions-grid">
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="convention.jpg" alt="Kigali Convention Centre"></div><div class="attraction-info"><h4>Kigali Convention Centre</h4><p>Iconic landmark hosting international conferences, events, and offering panoramic city views from its dome-shaped structure.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 8 minutes drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="arena.jpg" alt="BK Arena"></div><div class="attraction-info"><h4>BK Arena</h4><p>Rwanda's largest indoor arena hosting major sporting events, concerts, and international conferences with world-class facilities.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 12 minutes drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="nyandungu.jpg" alt="Nyandungu Eco Park"></div><div class="attraction-info"><h4>Nyandungu Eco Park</h4><p>A serene urban wetland park perfect for nature walks, bird watching, and enjoying Kigali's beautiful natural environment.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 15 minutes drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="genocide.jpg" alt="Kigali Genocide Memorial"></div><div class="attraction-info"><h4>Kigali Genocide Memorial</h4><p>A poignant memorial site honoring the victims of the 1994 genocide, offering educational exhibits and peaceful gardens for reflection.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 10 minutes drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="nyungwe.jpg" alt="Nyungwe National Park"></div><div class="attraction-info"><h4>Nyungwe National Park</h4><p>One of Africa's oldest rainforests, home to chimpanzees, colobus monkeys, and over 300 bird species with breathtaking canopy walks.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 5-6 hours drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="akagera.jpg" alt="Akagera National Park"></div><div class="attraction-info"><h4>Akagera National Park</h4><p>Rwanda's only savannah park with Big Five animals including lions, elephants, rhinos, and diverse wildlife in beautiful landscapes.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 2-3 hours drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="kivu.jpg" alt="Lake Kivu"></div><div class="attraction-info"><h4>Lake Kivu</h4><p>One of Africa's Great Lakes, offering beautiful beaches, water activities, and stunning sunset views along Rwanda's western border.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 3-4 hours drive</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="kigali.jpg" alt="Kigali City"></div><div class="attraction-info"><h4>Kigali City Tour</h4><p>Explore Rwanda's vibrant capital with its clean streets, local markets, art galleries, restaurants, and cultural experiences.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> Within city</div></div></div>
+        <div class="attraction-card reveal"><div class="attraction-image"><img src="virunga.jpg" alt="Volcanoes National Park"></div><div class="attraction-info"><h4>Volcanoes National Park</h4><p>Home to mountain gorillas and golden monkeys, offering trekking adventures in Rwanda's volcanic landscape.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 2-3 hours drive</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOUR BOOKING ===== -->
+  <section class="tour-booking" id="tour-booking">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Concierge</span>
+        <h2>Book Your Rwanda Adventure</h2>
+        <p class="section-subtitle">Through our concierge service, book tours to Rwanda's premier national parks like Akagera, Nyungwe, Volcanoes, and more. We also arrange luxury accommodations with the best designs available.</p>
+      </div>
+      <div class="split-layout">
+        <div class="form-card reveal-left">
+          <h3>BOOK FOR TOUR</h3>
+          <form id="tourBookingForm">
+            <div class="form-group"><input type="text" placeholder=" " required><label>Your Name</label><i class="fas fa-user"></i></div>
+            <div class="form-group"><input type="email" placeholder=" " required><label>Your Email</label><i class="fas fa-envelope"></i></div>
+            <div class="form-group"><input type="tel" placeholder=" " required><label>Your Phone</label><i class="fas fa-phone"></i></div>
+            <div class="form-group"><select required><option value="" disabled selected>Tour Destination</option><option value="akagera">Akagera National Park</option><option value="nyungwe">Nyungwe National Park</option><option value="volcanoes">Volcanoes National Park</option><option value="kigali">Kigali City</option><option value="lake-kivu">Lake Kivu</option></select><label>Tour Destination</label><i class="fas fa-map-marker-alt"></i></div>
+            <div class="form-group"><input type="number" placeholder=" " min="1" required><label>Number of People</label><i class="fas fa-users"></i></div>
+            <div class="form-group"><input type="date" placeholder=" " required><label>Preferred Start Date</label><i class="fas fa-calendar-alt"></i></div>
+            <div class="form-group"><textarea placeholder=" " required></textarea><label>Additional Details (e.g., room preferences, special requests)</label><i class="fas fa-comment-dots"></i></div>
+            <button type="submit" class="btn btn-arrow">Submit Booking Request <i class="fas fa-arrow-right"></i></button>
+          </form>
+        </div>
+        <div class="map-wrap reveal-right"><div id="map"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="label">Get in Touch</span>
+        <h2>Contact & Location</h2>
+        <p class="section-subtitle">Schedule a viewing or get in touch with our team for more information.</p>
+      </div>
+      <div class="split-layout" id="book-accomodation">
+        <div class="form-card reveal-left">
+          <h3>BOOK ACCOMMODATION & ROOMS</h3>
+          <form id="contactForm">
+            <div class="form-group"><input type="text" placeholder=" " required><label>Your Name</label><i class="fas fa-user"></i></div>
+            <div class="form-group"><input type="email" placeholder=" " required><label>Your Email</label><i class="fas fa-envelope"></i></div>
+            <div class="form-group"><input type="tel" placeholder=" " required><label>Your Phone</label><i class="fas fa-phone"></i></div>
+            <div class="form-group"><select required><option value="" disabled selected>Select Room Type</option><option value="single">Single Room - $25/night</option><option value="double">Double Room - $40/night</option><option value="suite">Executive Suite - $50/night</option><option value="one-bed">One Bedroom Apartment - $80/night</option><option value="two-bed">Two Bedroom Apartment - $100/night</option><option value="three-bed">Three Bedroom Apartment - $150/night</option></select><i class="fas fa-bed"></i></div>
+            <div class="form-group"><input type="date" placeholder=" " required><label>Check-in Date</label><i class="fas fa-calendar-alt"></i></div>
+            <div class="form-group"><input type="date" placeholder=" " required><label>Check-out Date</label><i class="fas fa-calendar-alt"></i></div>
+            <div class="form-group"><textarea placeholder=" " required></textarea><label>Your Message</label><i class="fas fa-comment-dots"></i></div>
+            <button type="submit" class="btn btn-arrow">Submit Request <i class="fas fa-arrow-right"></i></button>
+          </form>
+        </div>
+        <div class="map-wrap reveal-right"><div id="contact-map"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h3>Itunda Residence</h3><p>Experience luxury living at its finest in the heart of Kigali. Premium rooms with world-class amenities and exceptional service.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+        <div class="footer-col"><h3>Quick Links</h3><ul class="footer-links"><li><a href="#home"><i class="fas fa-home"></i> Home</a></li><li><a href="#rooms"><i class="fas fa-building"></i> Rooms</a></li><li><a href="#amenities"><i class="fas fa-swimming-pool"></i> Amenities</a></li><li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li><li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li></ul></div>
+        <div class="footer-col"><h3>Contact Info</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-map-marker-alt"></i> KG 46 St, Kigali, Rwanda</a></li><li><a href="tel:+250783277877"><i class="fas fa-phone"></i> +250 783 277 877</a></li><li><a href="mailto:itundaresidence@gmail.com"><i class="fas fa-envelope"></i> itundaresidence@gmail.com</a></li><li><a href="#"><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</a></li></ul></div>
+        <div class="footer-col"><h3>Lifestyle Tips</h3><p>Sign up for our newsletter to receive exclusive tips on luxury living in Kigali, local events, and residence updates.</p><div style="margin-top:20px;"><input type="email" placeholder="Your email" style="width:100%; padding:14px 20px; border-radius:60px; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.03); color:white; font-size:14px;"><button class="btn" style="width:100%; margin-top:12px; background:var(--accent-gold); color:var(--primary-dark);">Subscribe</button></div></div>
+      </div>
+      <div class="copyright"><p>&copy; 2025 Itunda Residence. All rights reserved. | Designed with luxury in mind</p></div>
+    </div>
+  </footer>
+
+  <!-- ===== BOOKING MODAL ===== -->
+  <div class="modal" id="bookingModal">
+    <div class="modal-content">
+      <div class="modal-header"><h3>Book a Viewing</h3><button class="close-modal" id="closeModal">&times;</button></div>
+      <div class="modal-body">
+        <form id="bookingForm">
+          <div class="form-group"><input type="text" placeholder=" " required><label>Full Name</label><i class="fas fa-user"></i></div>
+          <div class="form-group"><input type="email" placeholder=" " required><label>Email Address</label><i class="fas fa-envelope"></i></div>
+          <div class="form-group"><input type="tel" placeholder=" " required><label>Phone Number</label><i class="fas fa-phone"></i></div>
+          <div class="form-group"><input type="date" placeholder=" " required><label>Preferred Date</label><i class="fas fa-calendar-alt"></i></div>
+          <div class="form-group"><select required><option value="" disabled selected>Preferred Time</option><option value="morning">Morning (9am-12pm)</option><option value="afternoon">Afternoon (12pm-4pm)</option><option value="evening">Evening (4pm-7pm)</option></select><i class="fas fa-clock"></i></div>
+          <div class="form-group"><select required><option value="" disabled selected>Room Type</option><option value="single">Single Room</option><option value="double">Double Room</option></select><i class="fas fa-bed"></i></div>
+          <button type="submit" class="btn btn-arrow">Book Now <i class="fas fa-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LEAFET & SCRIPTS (LOCKED — DO NOT MODIFY FUNCTIONALITY) ===== -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // ---- NAVIGATION ----
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    mobileBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+      mobileBtn.innerHTML = mainNav.classList.contains('active') ?
+        '<i class="fas fa-times"></i>' :
+        '<i class="fas fa-bars"></i>';
+    });
+
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+        mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // ---- HEADER SCROLL + ACTIVE NAV ----
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 80) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav ul li a:not(.nav-cta)');
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 140;
+        if (window.scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active-link');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active-link');
+      });
+    });
+
+    // ---- MODAL ----
+    const modal = document.getElementById('bookingModal');
+    const closeModal = document.getElementById('closeModal');
+    const modalTriggers = document.querySelectorAll('#tourBookingBtn, .view-details-btn');
+    modalTriggers.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // ---- PESAPAL (LOCKED) ----
+    const pesapalLink = "https://store.pesapal.com/itundaresidence";
+    function openPesapal() { window.open(pesapalLink, '_blank'); }
+
+    // ---- EMAILJS FORMS (LOCKED — DO NOT MODIFY) ----
+    // Accommodation Form
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const orig = btn.innerHTML;
+      try {
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        btn.disabled = true;
+        const data = {
+          from_name: form.querySelector('input[type="text"]').value,
+          from_email: form.querySelector('input[type="email"]').value,
+          phone: form.querySelector('input[type="tel"]').value,
+          room_type: form.querySelector('select').value,
+          check_in_date: form.querySelectorAll('input[type="date"]')[0].value,
+          check_out_date: form.querySelectorAll('input[type="date"]')[1].value,
+          message: form.querySelector('textarea').value,
+          to_email: "itundaresidence@gmail.com"
+        };
+        await emailjs.send("service_8sxnzuh", "template_rq6rf91", data);
+        showNotif('Your Accommodation booking request has been submitted. You will get a confirmation as soon as possible.');
+        openPesapal();
+        form.reset();
+      } catch (err) { console.error(err);
+        showNotif('Sorry, there was an error. Please try again.'); } finally { btn.innerHTML = orig;
+        btn.disabled = false; }
+    });
+
+    // Tour Booking Form
+    document.getElementById('tourBookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const orig = btn.innerHTML;
+      try {
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        btn.disabled = true;
+        const data = {
+          from_name: form.querySelector('input[type="text"]').value,
+          from_email: form.querySelector('input[type="email"]').value,
+          phone: form.querySelector('input[type="tel"]').value,
+          tour_destination: form.querySelector('select').value,
+          num_people: form.querySelector('input[type="number"]').value,
+          start_date: form.querySelector('input[type="date"]').value,
+          details: form.querySelector('textarea').value,
+          to_email: "itundaresidence@gmail.com"
+        };
+        await emailjs.send("service_8sxnzuh", "template_sdkr713", data);
+        showNotif('Your Tour booking request has been submitted. You will get a confirmation as soon as possible!');
+        form.reset();
+      } catch (err) { console.error(err);
+        showNotif('Sorry, there was an error. Please try again.'); } finally { btn.innerHTML = orig;
+        btn.disabled = false; }
+    });
+
+    // Modal Booking Form
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const orig = btn.innerHTML;
+      try {
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        btn.disabled = true;
+        const data = {
+          from_name: form.querySelector('input[type="text"]').value,
+          from_email: form.querySelector('input[type="email"]').value,
+          phone: form.querySelector('input[type="tel"]').value,
+          preferred_date: form.querySelector('input[type="date"]').value,
+          preferred_time: form.querySelectorAll('select')[0].value,
+          room_type: form.querySelectorAll('select')[1].value,
+          to_email: "itundaresidence@gmail.com"
+        };
+        await emailjs.send("service_8sxnzuh", "", data);
+        showNotif('Your Accommodation booking request has been submitted.');
+        openPesapal();
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        form.reset();
+      } catch (err) { console.error(err);
+        showNotif('Sorry, there was an error. Please try again.'); } finally { btn.innerHTML = orig;
+        btn.disabled = false; }
+    });
+
+    function showNotif(msg) {
+      const el = document.createElement('div');
+      el.style.cssText =
+        `position:fixed;top:20px;right:20px;background:var(--accent-gold);color:var(--primary-dark);padding:16px 28px;border-radius:60px;box-shadow:0 20px 40px rgba(0,0,0,0.15);z-index:3000;font-weight:600;font-family:'Montserrat',sans-serif;backdrop-filter:blur(8px);animation:slideIn 0.4s ease-out;`;
+      el.textContent = msg;
+      document.body.appendChild(el);
+      setTimeout(() => {
+        el.style.animation = 'slideOut 0.4s ease-out forwards';
+        setTimeout(() => el.remove(), 400);
+      }, 4000);
+    }
+
+    // ---- FAQ ----
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        q.parentElement.classList.toggle('active');
+      });
+    });
+
+    // ---- MAPS ----
+    function initMap(id) {
+      const pos = [-1.9415685, 30.1265401];
+      const map = L.map(id).setView(pos, 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+      const icon = L.divIcon({
+        html: '<i class="fas fa-map-marker-alt" style="color:#c9a84c;font-size:30px;"></i>',
+        iconSize: [30, 30],
+        className: 'gold-marker'
+      });
+      L.marker(pos, { icon }).addTo(map)
+        .bindPopup(
+          `<div style="padding:10px;"><h3 style="margin:0 0 10px 0;font-family:'Playfair Display',serif;">Itunda Residence</h3><p style="margin:0;color:#5a5a5a;">KG 46 St, Kigali, Rwanda</p><a href="https://maps.google.com/?q=KG+46+St,+Kigali,+Rwanda" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#c9a84c;color:#0b0b0b;text-decoration:none;border-radius:60px;font-weight:600;">Directions</a></div>`
+        ).openPopup();
+    }
+    document.addEventListener('DOMContentLoaded', () => { initMap('map');
+      initMap('contact-map'); });
+
+    // ---- SCROLL REVEAL ----
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ---- HERO PARALLAX ----
+    window.addEventListener('scroll', () => {
+      const bg = document.querySelector('.hero-background');
+      if (bg) bg.style.transform = `scale(${1.06 - window.scrollY * 0.00012})`;
+    });
+
+    // ---- FLOATING LABELS ----
+    document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(inp => {
+      inp.addEventListener('focus', () => {
+        const lbl = inp.nextElementSibling;
+        if (lbl && lbl.tagName === 'LABEL') {
+          lbl.style.top = '-12px';
+          lbl.style.left = '18px';
+          lbl.style.fontSize = '0.75rem';
+          lbl.style.color = 'var(--accent-gold)';
+          lbl.style.background = 'white';
+          lbl.style.padding = '0 8px';
+        }
+      });
+      inp.addEventListener('blur', () => {
+        if (!inp.value) {
+          const lbl = inp.nextElementSibling;
+          if (lbl && lbl.tagName === 'LABEL') {
+            lbl.style.top = '18px';
+            lbl.style.left = '22px';
+            lbl.style.fontSize = '15px';
+            lbl.style.color = 'var(--text-muted)';
+            lbl.style.background = 'transparent';
+            lbl.style.padding = '0';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
