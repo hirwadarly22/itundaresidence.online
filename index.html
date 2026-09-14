@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ITUNDA RESIDENCE KIGALI — Luxury Living</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>AFRICA TOURS GUIDE AND ACCOMMODATION</title>
   <!-- Fonts & Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +17,7 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
     (function () {
-      emailjs.init({ publicKey: "Bkezhf8KlDyKE4_ki" });
+      emailjs.init({ publicKey: "ee2zw1TroU24h5q6W" });
     })();
   </script>
   <style>
@@ -62,6 +62,7 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -72,6 +73,13 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      min-width: 280px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
 
     h1,
@@ -114,6 +122,9 @@
       overflow: hidden;
       box-shadow: 0 12px 32px rgba(201, 168, 76, 0.20);
       font-family: var(--font-sans);
+      max-width: 100%;
+      word-break: break-word;
+      text-align: center;
     }
 
     .btn::before {
@@ -202,6 +213,7 @@
       display: inline-block;
       position: relative;
       letter-spacing: -0.03em;
+      word-break: break-word;
     }
 
     .section-title h2::after {
@@ -286,6 +298,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .logo {
@@ -298,10 +312,15 @@
       position: relative;
       z-index: 1001;
       transition: var(--transition-smooth);
+      line-height: 1.2;
+      flex-shrink: 0;
     }
 
     .logo span {
       color: var(--accent-gold);
+      display: block;
+      font-size: 0.7em;
+      line-height: 1.3;
     }
 
     .logo::after {
@@ -325,6 +344,7 @@
       list-style: none;
       align-items: center;
       gap: 4px;
+      flex-wrap: wrap;
     }
 
     nav ul li {
@@ -345,9 +365,9 @@
       align-items: center;
       gap: 6px;
       font-family: var(--font-sans);
+      white-space: nowrap;
     }
 
-    /* Gold dot indicator */
     nav ul li a::before {
       content: '';
       position: absolute;
@@ -369,7 +389,6 @@
       opacity: 1;
     }
 
-    /* Subtle underline accent */
     nav ul li a::after {
       content: '';
       position: absolute;
@@ -408,6 +427,7 @@
       gap: 10px !important;
       letter-spacing: 0.8px !important;
       font-size: 13px !important;
+      white-space: nowrap;
     }
 
     .nav-cta i {
@@ -440,6 +460,7 @@
       z-index: 1001;
       transition: var(--transition-smooth);
       padding: 4px;
+      flex-shrink: 0;
     }
 
     .mobile-menu-btn:hover {
@@ -487,6 +508,7 @@
       max-width: 1000px;
       padding: 0 30px;
       z-index: 2;
+      width: 100%;
     }
 
     .hero-badge {
@@ -504,6 +526,8 @@
       backdrop-filter: blur(4px);
       animation: fadeUp 1.2s ease-out 0.2s both;
       font-family: var(--font-sans);
+      word-break: break-word;
+      max-width: 100%;
     }
 
     .hero h1 {
@@ -514,6 +538,7 @@
       letter-spacing: -0.03em;
       line-height: 1.05;
       animation: fadeUp 1.2s ease-out 0.4s both;
+      word-break: break-word;
     }
 
     .hero h1 .highlight {
@@ -666,7 +691,6 @@
       transform: scale(1.07);
     }
 
-    /* Gradient overlay + CTA */
     .room-card .image-overlay {
       position: absolute;
       bottom: 0;
@@ -704,6 +728,7 @@
       opacity: 0;
       font-family: var(--font-sans);
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .room-card:hover .image-overlay .room-cta {
@@ -736,6 +761,7 @@
       color: var(--primary-dark);
       font-weight: 700;
       transition: transform 0.4s ease;
+      word-break: break-word;
     }
 
     .room-card:hover .info h3 {
@@ -756,6 +782,8 @@
       margin-bottom: 22px;
       padding-bottom: 22px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .room-features .feature {
@@ -764,6 +792,8 @@
       color: var(--text-light);
       font-weight: 500;
       letter-spacing: 0.3px;
+      flex: 1 0 auto;
+      min-width: 70px;
     }
 
     .room-features .feature i {
@@ -868,6 +898,7 @@
       font-size: 1.5rem;
       margin-bottom: 12px;
       font-weight: 700;
+      word-break: break-word;
     }
 
     .amenity-card p {
@@ -943,6 +974,8 @@
       font-size: 1.5rem;
       transform: translateY(20px);
       transition: transform 0.4s ease 0.1s;
+      word-break: break-word;
+      text-align: center;
     }
 
     .overlay p {
@@ -951,6 +984,7 @@
       transform: translateY(20px);
       transition: transform 0.4s ease 0.2s;
       font-weight: 300;
+      text-align: center;
     }
 
     .gallery-item:hover .overlay h4,
@@ -995,6 +1029,7 @@
       transition: var(--transition-smooth);
       background: var(--neutral-offwhite);
       font-family: var(--font-sans);
+      gap: 12px;
     }
 
     .faq-question:hover {
@@ -1005,6 +1040,7 @@
       color: var(--accent-gold);
       transition: transform 0.4s ease;
       font-size: 1.2rem;
+      flex-shrink: 0;
     }
 
     .faq-item.active .faq-toggle {
@@ -1078,6 +1114,7 @@
       font-size: 1.4rem;
       margin-bottom: 8px;
       font-weight: 700;
+      word-break: break-word;
     }
 
     .attraction-info p {
@@ -1097,6 +1134,7 @@
       gap: 10px;
       font-family: var(--font-sans);
       letter-spacing: 0.3px;
+      flex-wrap: wrap;
     }
 
     .attraction-distance i {
@@ -1150,6 +1188,7 @@
       font-weight: 700;
       color: var(--primary-dark);
       text-align: center;
+      word-break: break-word;
     }
 
     .form-group {
@@ -1169,6 +1208,8 @@
       background: var(--neutral-offwhite);
       font-family: var(--font-sans);
       color: var(--text-dark);
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .form-group input:focus,
@@ -1189,6 +1230,7 @@
       font-size: 18px;
       opacity: 0.5;
       transition: var(--transition-smooth);
+      pointer-events: none;
     }
 
     .form-group textarea~i {
@@ -1218,6 +1260,10 @@
       background: transparent;
       padding: 0;
       font-weight: 300;
+      max-width: calc(100% - 70px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .form-group input:focus+label,
@@ -1233,6 +1279,7 @@
       background: var(--neutral-white);
       padding: 0 8px;
       font-weight: 600;
+      max-width: calc(100% - 30px);
     }
 
     .map-wrap {
@@ -1273,6 +1320,7 @@
       position: relative;
       padding-bottom: 14px;
       font-weight: 700;
+      word-break: break-word;
     }
 
     .footer-col h3::after {
@@ -1308,6 +1356,7 @@
       gap: 12px;
       font-weight: 300;
       font-size: 0.95rem;
+      word-break: break-word;
     }
 
     .footer-links a i {
@@ -1315,6 +1364,7 @@
       width: 20px;
       text-align: center;
       font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
     .footer-links a:hover {
@@ -1326,6 +1376,7 @@
       display: flex;
       gap: 14px;
       margin-top: 24px;
+      flex-wrap: wrap;
     }
 
     .social-links a {
@@ -1339,6 +1390,7 @@
       color: rgba(255, 255, 255, 0.60);
       transition: var(--transition-smooth);
       font-size: 1.1rem;
+      flex-shrink: 0;
     }
 
     .social-links a:hover {
@@ -1355,6 +1407,7 @@
       font-size: 0.85rem;
       font-weight: 300;
       letter-spacing: 0.5px;
+      word-break: break-word;
     }
 
     /* ============================================================
@@ -1374,6 +1427,7 @@
       align-items: center;
       justify-content: center;
       padding: 25px;
+      overflow-y: auto;
     }
 
     .modal.active {
@@ -1390,6 +1444,7 @@
       position: relative;
       animation: modalIn 0.5s ease-out;
       box-shadow: var(--shadow-heavy);
+      -webkit-overflow-scrolling: touch;
     }
 
     @keyframes modalIn {
@@ -1409,11 +1464,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .modal-header h3 {
       font-size: 2rem;
       font-weight: 700;
+      word-break: break-word;
     }
 
     .close-modal {
@@ -1424,6 +1482,8 @@
       cursor: pointer;
       transition: var(--transition-smooth);
       padding: 0 8px;
+      line-height: 1;
+      flex-shrink: 0;
     }
 
     .close-modal:hover {
@@ -1436,8 +1496,64 @@
     }
 
     /* ============================================================
-               RESPONSIVE
+               RESPONSIVE — MAJOR BREAKPOINTS
                ============================================================ */
+
+    /* --- Ultra-wide / TV screens (>= 2000px) --- */
+    @media (min-width: 2000px) {
+      .container {
+        max-width: 1800px;
+        padding: 0 80px;
+      }
+
+      .hero h1 {
+        font-size: 7rem;
+      }
+
+      .hero p {
+        font-size: 1.6rem;
+        max-width: 900px;
+      }
+
+      .section-title h2 {
+        font-size: 4.8rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.4rem;
+        max-width: 900px;
+      }
+
+      .room-card .info h3 {
+        font-size: 2.6rem;
+      }
+
+      .room-price {
+        font-size: 3rem;
+      }
+
+      .amenity-card h3 {
+        font-size: 2rem;
+      }
+
+      .rooms-grid {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      }
+
+      .amenities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      }
+
+      .attractions-grid {
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      }
+    }
+
+    /* --- Large Desktop (1200px – 1999px) --- */
     @media (max-width: 1200px) {
       .split-layout {
         grid-template-columns: 1fr;
@@ -1451,21 +1567,62 @@
       }
     }
 
+    /* --- Tablet Landscape (1024px) --- */
     @media (max-width: 1024px) {
+      .container {
+        padding: 0 30px;
+      }
+
       .hero h1 {
         font-size: 4rem;
       }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
       .section-title h2 {
         font-size: 3rem;
       }
+
+      .section-title {
+        margin-bottom: 60px;
+      }
+
       .rooms-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+      }
+
+      .form-card {
+        padding: 48px 40px;
+      }
+
+      .amenities-grid {
+        gap: 30px;
+      }
+
+      .attractions-grid {
+        gap: 30px;
       }
     }
 
+    /* --- Tablet Portrait & Large Phones (768px) --- */
     @media (max-width: 768px) {
       .container {
         padding: 0 24px;
+      }
+
+      header {
+        padding: 18px 0;
+      }
+
+      header.scrolled {
+        padding: 8px 0;
+      }
+
+      .logo {
+        font-size: 22px;
       }
 
       .mobile-menu-btn {
@@ -1477,7 +1634,7 @@
         top: 0;
         right: -100%;
         width: 320px;
-        max-width: 80vw;
+        max-width: 85vw;
         height: 100vh;
         background: rgba(11, 11, 11, 0.98);
         backdrop-filter: blur(28px);
@@ -1488,6 +1645,7 @@
         border-left: 1px solid rgba(201, 168, 76, 0.06);
         box-shadow: -20px 0 60px rgba(0, 0, 0, 0.40);
         display: block;
+        overflow-y: auto;
       }
 
       nav.active {
@@ -1498,6 +1656,7 @@
         flex-direction: column;
         align-items: stretch;
         gap: 2px;
+        flex-wrap: nowrap;
       }
 
       nav ul li {
@@ -1518,6 +1677,7 @@
         width: 100%;
         border-radius: 12px;
         justify-content: flex-start;
+        white-space: normal;
       }
 
       nav ul li a::before,
@@ -1550,17 +1710,33 @@
         width: 100%;
       }
 
+      .hero {
+        min-height: 600px;
+        height: 100vh;
+      }
+
       .hero h1 {
         font-size: 2.8rem;
       }
+
       .hero p {
-        font-size: 1.05rem;
+        font-size: 1rem;
+        margin-bottom: 36px;
       }
+
+      .hero-badge {
+        font-size: 0.65rem;
+        padding: 7px 20px;
+        letter-spacing: 3px;
+        margin-bottom: 24px;
+      }
+
       .hero-buttons {
         flex-direction: column;
         align-items: center;
         gap: 16px;
       }
+
       .btn {
         width: 100%;
         max-width: 340px;
@@ -1568,99 +1744,488 @@
         font-size: 13px;
       }
 
+      .hero-btn-primary,
+      .hero-btn-secondary {
+        padding: 16px 28px;
+        font-size: 13px;
+      }
+
+      .section-title {
+        margin-bottom: 50px;
+      }
+
       .section-title h2 {
         font-size: 2.4rem;
       }
+
       .section-title h2::after {
         width: 50px;
+        bottom: -10px;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        margin-top: 24px;
+        padding: 0 10px;
+      }
+
+      .rooms {
+        padding: 100px 0 80px;
       }
 
       .rooms-grid {
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
       .room-card .image-wrap {
         height: 250px;
       }
 
+      .room-card .info {
+        padding: 26px 24px 30px;
+      }
+
+      .room-card .info h3 {
+        font-size: 1.7rem;
+      }
+
+      .room-features .feature {
+        font-size: 0.75rem;
+      }
+
+      .room-price {
+        font-size: 1.9rem;
+      }
+
+      .amenities {
+        padding: 90px 0;
+      }
+
       .amenities-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
+
+      .amenity-card {
+        padding: 40px 24px 36px;
+      }
+
+      .gallery {
+        padding: 90px 0;
+      }
+
       .gallery-grid {
         grid-template-columns: 1fr;
-      }
-      .attractions-grid {
-        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
-      .form-card {
-        padding: 40px 28px;
-      }
-      .split-layout {
-        gap: 40px;
+      .gallery-item {
+        height: 260px;
       }
 
-      .map-wrap {
-        min-height: 300px;
+      .overlay h4 {
+        font-size: 1.3rem;
       }
-      .map-wrap #map,
-      .map-wrap #contact-map {
-        min-height: 300px;
+
+      .faq {
+        padding: 90px 0;
       }
 
       .faq-question {
         padding: 18px 22px;
         font-size: 0.95rem;
       }
+
       .faq-answer {
         padding: 0 22px;
       }
+
       .faq-item.active .faq-answer {
         padding: 0 22px 22px;
       }
 
+      .attractions {
+        padding: 90px 0;
+      }
+
+      .attractions-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .attraction-image {
+        height: 200px;
+      }
+
+      .tour-booking,
+      .contact-section {
+        padding: 90px 0;
+      }
+
+      .split-layout {
+        gap: 40px;
+      }
+
+      .form-card {
+        padding: 40px 28px;
+      }
+
+      .form-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 26px;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        padding: 16px 44px 16px 18px;
+        font-size: 14px;
+      }
+
+      .form-group label {
+        font-size: 14px;
+        left: 18px;
+        top: 16px;
+      }
+
+      .form-group input:focus+label,
+      .form-group input:not(:placeholder-shown)+label,
+      .form-group textarea:focus+label,
+      .form-group textarea:not(:placeholder-shown)+label,
+      .form-group select:focus+label,
+      .form-group select:not([value=""])+label {
+        top: -10px;
+        left: 14px;
+        font-size: 0.7rem;
+      }
+
+      .form-group i {
+        right: 16px;
+        font-size: 16px;
+      }
+
+      .map-wrap {
+        min-height: 300px;
+      }
+
+      .map-wrap #map,
+      .map-wrap #contact-map {
+        min-height: 300px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 30px;
+      }
+
+      .footer-col h3 {
+        font-size: 1.3rem;
+      }
+
+      .modal {
+        padding: 12px;
+      }
+
       .modal-content {
-        margin: 10px;
+        margin: 0;
+        max-height: 92vh;
       }
+
       .modal-header {
-        padding: 24px 28px 16px;
+        padding: 24px 24px 16px;
       }
+
+      .modal-header h3 {
+        font-size: 1.6rem;
+      }
+
       .modal-body {
-        padding: 24px 28px 30px;
+        padding: 24px 24px 30px;
       }
 
       .scroll-indicator {
         display: none;
       }
+
+      .btn {
+        max-width: 100%;
+      }
+
+      .hero-btn-primary,
+      .hero-btn-secondary {
+        max-width: 100%;
+      }
     }
 
+    /* --- Small Phones (480px) --- */
     @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      .hero-badge {
-        font-size: 0.6rem;
-        padding: 6px 18px;
-        letter-spacing: 3px;
-      }
-      .section-title h2 {
-        font-size: 2rem;
-      }
-      .room-card .info h3 {
-        font-size: 1.7rem;
-      }
-      .room-price {
-        font-size: 1.8rem;
-      }
-      .btn {
-        font-size: 12px;
-        padding: 14px 22px;
-      }
-      .logo {
-        font-size: 22px;
-      }
       .container {
         padding: 0 16px;
+      }
+
+      header {
+        padding: 14px 0;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .logo span {
+        font-size: 0.65em;
+      }
+
+      .hero {
+        min-height: 540px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+      }
+
+      .hero-badge {
+        font-size: 0.55rem;
+        padding: 6px 16px;
+        letter-spacing: 2px;
+      }
+
+      .hero-content {
+        padding: 0 18px;
+      }
+
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+
+      .section-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .section-title {
+        margin-bottom: 40px;
+      }
+
+      .room-card .info h3 {
+        font-size: 1.5rem;
+      }
+
+      .room-price {
+        font-size: 1.6rem;
+      }
+
+      .room-features {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .room-features .feature {
+        flex: 0 0 auto;
+        min-width: 60px;
+        font-size: 0.7rem;
+      }
+
+      .amenity-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .amenity-card {
+        padding: 32px 18px 28px;
+      }
+
+      .amenity-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 18px;
+      }
+
+      .amenity-icon i {
+        font-size: 26px;
+      }
+
+      .btn {
+        font-size: 11px;
+        padding: 14px 18px;
+        letter-spacing: 1.2px;
+        gap: 10px;
+      }
+
+      .hero-btn-primary,
+      .hero-btn-secondary {
+        padding: 14px 18px;
+        font-size: 11px;
+      }
+
+      .gallery-item {
+        height: 200px;
+      }
+
+      .overlay h4 {
+        font-size: 1.1rem;
+      }
+
+      .overlay p {
+        font-size: 0.8rem;
+      }
+
+      .faq-question {
+        padding: 16px 16px;
+        font-size: 0.88rem;
+      }
+
+      .faq-answer {
+        padding: 0 16px;
+        font-size: 0.88rem;
+      }
+
+      .faq-item.active .faq-answer {
+        padding: 0 16px 18px;
+      }
+
+      .attraction-info {
+        padding: 20px 18px 24px;
+      }
+
+      .attraction-info h4 {
+        font-size: 1.2rem;
+      }
+
+      .attraction-info p {
+        font-size: 0.88rem;
+      }
+
+      .form-card {
+        padding: 30px 18px;
+      }
+
+      .form-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 22px;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        padding: 14px 38px 14px 14px;
+        font-size: 13px;
+      }
+
+      .form-group label {
+        font-size: 13px;
+        left: 14px;
+        top: 14px;
+      }
+
+      .form-group i {
+        right: 12px;
+        font-size: 14px;
+      }
+
+      .form-group textarea {
+        min-height: 100px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-col h3 {
+        font-size: 1.2rem;
+      }
+
+      .social-links a {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+      }
+
+      .modal-header {
+        padding: 18px 16px 12px;
+      }
+
+      .modal-header h3 {
+        font-size: 1.3rem;
+      }
+
+      .modal-body {
+        padding: 18px 16px 24px;
+      }
+
+      .close-modal {
+        font-size: 1.6rem;
+      }
+
+      .copyright {
+        font-size: 0.75rem;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+
+      .nav-cta {
+        font-size: 13px !important;
+        padding: 14px 20px !important;
+      }
+
+      .form-group input:focus+label,
+      .form-group input:not(:placeholder-shown)+label,
+      .form-group textarea:focus+label,
+      .form-group textarea:not(:placeholder-shown)+label,
+      .form-group select:focus+label,
+      .form-group select:not([value=""])+label {
+        top: -9px;
+        left: 10px;
+        font-size: 0.65rem;
+      }
+    }
+
+    /* --- Very Small Phones (360px) --- */
+    @media (max-width: 360px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+
+      .logo {
+        font-size: 15px;
+      }
+
+      .logo span {
+        font-size: 0.6em;
+      }
+
+      .room-card .info h3 {
+        font-size: 1.3rem;
+      }
+
+      .room-price {
+        font-size: 1.4rem;
+      }
+
+      .btn {
+        font-size: 10px;
+        padding: 12px 14px;
+      }
+
+      .amenity-card h3 {
+        font-size: 1.1rem;
+      }
+
+      .nav-cta {
+        font-size: 11px !important;
+        padding: 12px 14px !important;
       }
     }
 
@@ -1707,6 +2272,38 @@
     ::-webkit-scrollbar-thumb:hover {
       background: var(--accent-gold-light);
     }
+
+    /* ============================================================
+               TOUCH & ACCESSIBILITY
+               ============================================================ */
+    @media (hover: none) {
+      .room-card .image-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(11, 11, 11, 0.75) 0%, transparent 100%);
+      }
+      .room-card .image-overlay .room-cta {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .gallery-item .overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(11, 11, 11, 0.70), transparent 55%);
+      }
+      .gallery-item .overlay h4,
+      .gallery-item .overlay p {
+        transform: translateY(0);
+      }
+    }
+
+    /* Focus styles for accessibility */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent-gold);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 
@@ -1714,7 +2311,7 @@
   <!-- ===== HEADER ===== -->
   <header>
     <div class="container header-container">
-      <a href="#" class="logo">ITUNDA <span>RESIDENCE</span></a>
+      <a href="#" class="logo">Africa <span>Tours<br> Guide and Accomodation</span></a>
       <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
@@ -1740,7 +2337,7 @@
     <div class="hero-content">
       <div class="hero-badge">✦ Premier Residence in Kigali</div>
       <h1>Luxury Meets <span class="highlight">Kigali</span></h1>
-      <p>Experience true style at Itunda Residence, where modern design blends effortlessly with timeless elegance in the heart of Rwanda's vibrant capital.</p>
+      <p>Experience true style at Africa Tours Guide and Accomodation, where modern design blends effortlessly with timeless elegance in the heart of Rwanda's vibrant capital.</p>
       <div class="hero-buttons">
         <a href="#book-accomodation" class="btn hero-btn-primary btn-arrow">Book Your Stay <i class="fas fa-arrow-right"></i></a>
         <a href="#tour-booking" class="btn hero-btn-secondary">Explore Residence</a>
@@ -1777,7 +2374,7 @@
               <span class="feature"><i class="fas fa-bath"></i>1 Bath</span>
               <span class="feature"><i class="fas fa-vector-square"></i>25 m²</span>
             </div>
-            <div class="room-price">$25 <small>/ night</small></div>
+            <div class="room-price">$30<small>/ night</small></div>
           </div>
         </div>
         <!-- Double Room -->
@@ -1918,7 +2515,7 @@
       <div class="section-title reveal">
         <span class="label">Visual Story</span>
         <h2>Residence Gallery</h2>
-        <p class="section-subtitle">Explore the exquisite interiors and stunning common areas of Itunda Residence.</p>
+        <p class="section-subtitle">Explore the exquisite interiors and stunning common areas of Africa Tours Guide and Accomodation</p>
       </div>
       <div class="gallery-grid">
         <div class="gallery-item reveal"><img src="kitchen.png" alt="Modern Kitchen"><div class="overlay"><h4>Modern Kitchen</h4><p>Bright, open kitchen perfect for cooking and entertaining</p></div></div>
@@ -1939,7 +2536,7 @@
       <div class="section-title reveal">
         <span class="label">Questions</span>
         <h2>Frequently Asked Questions</h2>
-        <p class="section-subtitle">Find answers to common questions about living at Itunda Residence.</p>
+        <p class="section-subtitle">Find answers to common questions about living at Africa Tours Guide.</p>
       </div>
       <div class="faq-container reveal">
         <div class="faq-item">
@@ -1964,7 +2561,7 @@
       <div class="section-title reveal">
         <span class="label">Discover</span>
         <h2>Explore Kigali Tours And Other Different Places</h2>
-        <p class="section-subtitle">Discover the vibrant attractions and cultural landmarks near Itunda Residence.</p>
+        <p class="section-subtitle">Discover the vibrant attractions and cultural landmarks near Africa Tours Guide.</p>
       </div>
       <div class="attractions-grid">
         <div class="attraction-card reveal"><div class="attraction-image"><img src="convention.jpg" alt="Kigali Convention Centre"></div><div class="attraction-info"><h4>Kigali Convention Centre</h4><p>Iconic landmark hosting international conferences, events, and offering panoramic city views from its dome-shaped structure.</p><div class="attraction-distance"><i class="fas fa-location-arrow"></i> 8 minutes drive</div></div></div>
@@ -2022,7 +2619,7 @@
             <div class="form-group"><input type="text" placeholder=" " required><label>Your Name</label><i class="fas fa-user"></i></div>
             <div class="form-group"><input type="email" placeholder=" " required><label>Your Email</label><i class="fas fa-envelope"></i></div>
             <div class="form-group"><input type="tel" placeholder=" " required><label>Your Phone</label><i class="fas fa-phone"></i></div>
-            <div class="form-group"><select required><option value="" disabled selected>Select Room Type</option><option value="single">Single Room - $25/night</option><option value="double">Double Room - $40/night</option><option value="suite">Executive Suite - $50/night</option><option value="one-bed">One Bedroom Apartment - $80/night</option><option value="two-bed">Two Bedroom Apartment - $100/night</option><option value="three-bed">Three Bedroom Apartment - $150/night</option></select><i class="fas fa-bed"></i></div>
+            <div class="form-group"><select required><option value="" disabled selected>Select Room Type</option><option value="single">Single Room - $30/night</option><option value="double">Double Room - $40/night</option><option value="suite">Executive Suite - $50/night</option><option value="one-bed">One Bedroom Apartment - $80/night</option><option value="two-bed">Two Bedroom Apartment - $100/night</option><option value="three-bed">Three Bedroom Apartment - $150/night</option></select><i class="fas fa-bed"></i></div>
             <div class="form-group"><input type="date" placeholder=" " required><label>Check-in Date</label><i class="fas fa-calendar-alt"></i></div>
             <div class="form-group"><input type="date" placeholder=" " required><label>Check-out Date</label><i class="fas fa-calendar-alt"></i></div>
             <div class="form-group"><textarea placeholder=" " required></textarea><label>Your Message</label><i class="fas fa-comment-dots"></i></div>
@@ -2038,12 +2635,12 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-col"><h3>Itunda Residence</h3><p>Experience luxury living at its finest in the heart of Kigali. Premium rooms with world-class amenities and exceptional service.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+        <div class="footer-col"><h3>Africa Tours Guide  </h3><p>Experience luxury living at its finest in the heart of Kigali. Premium rooms with world-class amenities and exceptional service.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
         <div class="footer-col"><h3>Quick Links</h3><ul class="footer-links"><li><a href="#home"><i class="fas fa-home"></i> Home</a></li><li><a href="#rooms"><i class="fas fa-building"></i> Rooms</a></li><li><a href="#amenities"><i class="fas fa-swimming-pool"></i> Amenities</a></li><li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li><li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li></ul></div>
-        <div class="footer-col"><h3>Contact Info</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-map-marker-alt"></i> KG 46 St, Kigali, Rwanda</a></li><li><a href="tel:+250783277877"><i class="fas fa-phone"></i> +250 783 277 877</a></li><li><a href="mailto:itundaresidence@gmail.com"><i class="fas fa-envelope"></i> itundaresidence@gmail.com</a></li><li><a href="#"><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</a></li></ul></div>
+        <div class="footer-col"><h3>Contact Info</h3><ul class="footer-links"><li><a href="#"><i class="fas fa-map-marker-alt"></i> KG 46 St, Kigali, Rwanda</a></li><li><a href="tel:+250783277877"><i class="fas fa-phone"></i> +250 783 277 877</a></li><li><a href="mailto:africatoursguide21@gmail.com"><i class="fas fa-envelope"></i> africatoursguide21@gmail.com</a></li><li><a href="#"><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</a></li></ul></div>
         <div class="footer-col"><h3>Lifestyle Tips</h3><p>Sign up for our newsletter to receive exclusive tips on luxury living in Kigali, local events, and residence updates.</p><div style="margin-top:20px;"><input type="email" placeholder="Your email" style="width:100%; padding:14px 20px; border-radius:60px; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.03); color:white; font-size:14px;"><button class="btn" style="width:100%; margin-top:12px; background:var(--accent-gold); color:var(--primary-dark);">Subscribe</button></div></div>
       </div>
-      <div class="copyright"><p>&copy; 2025 Itunda Residence. All rights reserved. | Designed with luxury in mind</p></div>
+      <div class="copyright"><p>&copy; 2025 Africa Tours Guide. All rights reserved. | Designed with luxury in mind</p></div>
     </div>
   </footer>
 
@@ -2065,7 +2662,7 @@
     </div>
   </div>
 
-  <!-- ===== LEAFET & SCRIPTS (LOCKED — DO NOT MODIFY FUNCTIONALITY) ===== -->
+  <!-- ===== LEAFLET & SCRIPTS (LOCKED — DO NOT MODIFY FUNCTIONALITY) ===== -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     // ---- NAVIGATION ----
@@ -2148,9 +2745,9 @@
           check_in_date: form.querySelectorAll('input[type="date"]')[0].value,
           check_out_date: form.querySelectorAll('input[type="date"]')[1].value,
           message: form.querySelector('textarea').value,
-          to_email: "itundaresidence@gmail.com"
+          to_email: "africatoursguide21@gmail.com"
         };
-        await emailjs.send("service_8sxnzuh", "template_rq6rf91", data);
+        await emailjs.send("service_vbg4jia", "template_dorulkv", data);
         showNotif('Your Accommodation booking request has been submitted. You will get a confirmation as soon as possible.');
         openPesapal();
         form.reset();
@@ -2176,9 +2773,9 @@
           num_people: form.querySelector('input[type="number"]').value,
           start_date: form.querySelector('input[type="date"]').value,
           details: form.querySelector('textarea').value,
-          to_email: "itundaresidence@gmail.com"
+          to_email: "africatoursguide21@gmail.com"
         };
-        await emailjs.send("service_8sxnzuh", "template_sdkr713", data);
+        await emailjs.send("service_vbg4jia", "template_50v7xmp", data);
         showNotif('Your Tour booking request has been submitted. You will get a confirmation as soon as possible!');
         form.reset();
       } catch (err) { console.error(err);
@@ -2202,9 +2799,9 @@
           preferred_date: form.querySelector('input[type="date"]').value,
           preferred_time: form.querySelectorAll('select')[0].value,
           room_type: form.querySelectorAll('select')[1].value,
-          to_email: "itundaresidence@gmail.com"
+          to_email: "africatoursguide21@gmail.com"
         };
-        await emailjs.send("service_8sxnzuh", "", data);
+        await emailjs.send("service_vbg4jia", "template_dorulkv", data);
         showNotif('Your Accommodation booking request has been submitted.');
         openPesapal();
         modal.classList.remove('active');
@@ -2218,7 +2815,7 @@
     function showNotif(msg) {
       const el = document.createElement('div');
       el.style.cssText =
-        `position:fixed;top:20px;right:20px;background:var(--accent-gold);color:var(--primary-dark);padding:16px 28px;border-radius:60px;box-shadow:0 20px 40px rgba(0,0,0,0.15);z-index:3000;font-weight:600;font-family:'Montserrat',sans-serif;backdrop-filter:blur(8px);animation:slideIn 0.4s ease-out;`;
+        `position:fixed;top:20px;right:20px;left:20px;max-width:420px;margin:0 auto;background:var(--accent-gold);color:var(--primary-dark);padding:16px 28px;border-radius:60px;box-shadow:0 20px 40px rgba(0,0,0,0.15);z-index:3000;font-weight:600;font-family:'Montserrat',sans-serif;backdrop-filter:blur(8px);animation:slideIn 0.4s ease-out;text-align:center;`;
       el.textContent = msg;
       document.body.appendChild(el);
       setTimeout(() => {
@@ -2248,7 +2845,7 @@
       });
       L.marker(pos, { icon }).addTo(map)
         .bindPopup(
-          `<div style="padding:10px;"><h3 style="margin:0 0 10px 0;font-family:'Playfair Display',serif;">Itunda Residence</h3><p style="margin:0;color:#5a5a5a;">KG 46 St, Kigali, Rwanda</p><a href="https://maps.google.com/?q=KG+46+St,+Kigali,+Rwanda" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#c9a84c;color:#0b0b0b;text-decoration:none;border-radius:60px;font-weight:600;">Directions</a></div>`
+          `<div style="padding:10px;"><h3 style="margin:0 0 10px 0;font-family:'Playfair Display',serif;">Africa Tour Guide</h3><p style="margin:0;color:#5a5a5a;">KG 46 St, Kigali, Rwanda</p><a href="https://maps.google.com/?q=KG+46+St,+Kigali,+Rwanda" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#c9a84c;color:#0b0b0b;text-decoration:none;border-radius:60px;font-weight:600;">Directions</a></div>`
         ).openPopup();
     }
     document.addEventListener('DOMContentLoaded', () => { initMap('map');
